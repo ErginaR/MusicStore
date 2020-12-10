@@ -1,0 +1,48 @@
+﻿@model IEnumerable<MusicStore.Domain.Entities.Album>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2>Albums</h2>
+    </div>
+    <div class="panel-body">
+        @Html.ActionLink("Create New Album", "Create", null, new {@class="btn btn-lg btn-primary" })
+        <hr/>
+        <table class="table table-bordered table-hover">
+            <thead class="bg-info">
+                <tr>
+                    <th colspan="2">Edit | Delete</th>
+                    <th>Title</th>
+                    <th>Artist</th>
+                    <th>Genre</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var album in Model)
+                {
+                <tr>
+                    <td class="text-center">
+                        @Html.ActionLink("Edit", "Edit", new { albumId = @album.AlbumID }, new { @class = "btn btn-success" })
+                    </td>
+                    <td class="text-center">
+                        @using (Html.BeginForm("Delete", "Admin"))
+                        {
+                            @Html.Hidden("albumId", album.AlbumID)
+                            <input type="submit" value="Delete" class="btn btn-danger"/>
+                        }
+                    </td>
+                    <td>@album.Title</td>
+                    <td>@album.Artist</td>
+                    <td>@album.Genre</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

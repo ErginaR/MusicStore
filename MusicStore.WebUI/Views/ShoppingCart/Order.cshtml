@@ -1,0 +1,48 @@
+﻿@model MusicStore.Domain.Entities.Cart
+
+@{
+    ViewBag.Title = "Order";
+}
+
+<h2 class="text-success">Order</h2>
+<table class="bg-danger table table-bordered table-hover ">
+    <thead>
+        <tr>
+            <td>Album Name</td>
+            <td>Price(each)</td>
+            <td>Quantity</td>
+            <td>
+                @using (Html.BeginForm("RemoveAll", "ShoppingCart"))
+                {
+                    @Html.Hidden("returnUrl", (string)ViewBag.ReturnUrl)
+                    <input type="submit" value="Remove All" class="btn btn-danger" />
+                }
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var line in Model.LineCollection())
+    {
+        <tr>
+            <td>@line.Album.Title</td>
+            <td>@line.Album.Price</td>
+            <td>@line.Quantity</td>
+            <td>
+                @using (Html.BeginForm("Remove", "ShoppingCart"))
+                {
+                    @Html.Hidden("returnUrl", (string)ViewBag.ReturnUrl)
+                    @Html.Hidden("albumId", line.Album.AlbumID)
+                    <input type="submit" value="Remove" class="btn btn-danger" />
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3"><a class="btn btn-success" href="@ViewBag.ReturnUrl">Continue Shopping</a></td>
+            <td>@Html.ActionLink("Checkout","Checkout",null,new {@class="btn btn-primary" })</td>
+        </tr>
+    </tfoot>
+</table>
+

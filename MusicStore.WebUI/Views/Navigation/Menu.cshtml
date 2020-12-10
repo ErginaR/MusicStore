@@ -1,0 +1,6 @@
+﻿@model IEnumerable<string>
+
+    @foreach(var genre in Model)
+    {
+        @Html.ActionLink(genre,"Index", "Home",new {genre=genre },new { @class="btn btn-default btn-block"+(genre==ViewBag.Genre?" btn-primary":"")});
+    }

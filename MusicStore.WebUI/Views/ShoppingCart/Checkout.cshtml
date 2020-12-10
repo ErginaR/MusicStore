@@ -1,0 +1,35 @@
+﻿@model MusicStore.Domain.Entities.ShippingInformation
+
+@{
+    ViewBag.Title = "Checkout";
+}
+<div>
+    <h2 class="text-success">Shipping Information</h2>
+    @{ var i = 1;}
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        foreach (var el in ViewData.ModelMetadata.Properties)
+        {
+            <div class=@(i % 2 == 0 ? "row" : "")>
+                @if (@el.PropertyName != "PromoCode")
+                {
+                    <div class="form-group col-md-6">
+                        <label>@el.PropertyName</label>
+                        @Html.TextBox(el.PropertyName, null, new { @class = "form-control" })
+                    </div>
+                }
+            </div>
+            { i++; }
+        }
+        <br />
+        <h2 class="text-success">Payment</h2>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>Promo Code</label>
+                @Html.TextBoxFor(x => x.PromoCode, new { @class = "form-control" })
+            </div>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-success" />
+    }
+</div>

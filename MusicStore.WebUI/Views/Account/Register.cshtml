@@ -1,0 +1,33 @@
+﻿@model MusicStore.WebUI.Models.RegisterData
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create a new Account</h2>
+<div class="table-bordered">
+    <p>Use the form below to create a new account</p>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <div class="form-group">
+            <label>Username</label>
+            @Html.TextBoxFor(x => x.User.UserName, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Email Address</label>
+            @Html.TextBoxFor(x => x.User.Email, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            @Html.PasswordFor(x => x.User.Password, new { @class = "form-control " })
+        </div>
+        <div class="form-group">
+            <label>Confirm Password</label>
+            @Html.PasswordFor(x => x.PasswordConfirm, new { @class = "form-control" })
+        </div>
+        
+        <input type="submit" value="Register" class="btn btn-primary" />
+        <input type="reset" value="Clear" class="btn btn-warning">
+    }
+</div>

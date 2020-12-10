@@ -1,0 +1,26 @@
+﻿@using MusicStore.Domain.Entities
+@model IEnumerable<Album>
+
+@{
+    ViewBag.Title = "Index";
+}
+@{int i = 1; }
+<div class="container">
+@foreach (var album in Model)
+{
+    <div class=@(i % 4 == 0 ? "row" : "")>
+        @{i++;}
+
+        <div class="col-md-2 well well-sm text-success" style="margin-right:50px;">
+            <table class=" table table-striped">
+                <tr>
+                    <td><h1 class="text-danger text-center"><span class="glyphicon glyphicon-music"></span></h1></td>
+                </tr>
+                <tr>
+                    <td class="text-center"> @Html.ActionLink(album.Title, "Details", "Home", new { id = @album.AlbumID,returnUrl=@Request.Url.PathAndQuery }, new { @class = "text-success" })</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+}
+</div>
